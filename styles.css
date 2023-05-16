@@ -5,7 +5,7 @@ body {
 
 header {
   background-color: #333;
-  color: #fff;
+  color: #ffbc03;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -77,7 +77,7 @@ nav a {
 
 #cart-container {
   margin-top: 20px;
-  border: 1px solid #ffbc03;
+  border: 1px solid #fafafa;
   padding: 20px;
   max-width: 300px;
 }
