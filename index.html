@@ -1,52 +1,4 @@
-<!DOCTY<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Christian T-Shirts</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <header>
-    <h1>Christian T-Shirts</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">Cart</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section id="products">
-      <h2>Featured Products</h2>
-      <div class="product">
-        <img src="tshirt1.jpg" alt="T-Shirt 1">
-        <h3>T-Shirt 1</h3>
-        <p>$19.99</p>
-        <button>Add to Cart</button>
-      </div>
-      
-      <div class="product">
-        <img src="tshirt2.jpg" alt="T-Shirt 2">
-        <h3>T-Shirt 2</h3>
-        <p>$24.99</p>
-        <button>Add to Cart</button>
-      </div>
-      
-      <!-- Add more product items here -->
-      
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy; 2023 Christian T-Shirts. All rights reserved.</p>
-  </footer>
-</body>
-</html>
-PE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -56,13 +8,13 @@ PE html>
 <body>
   <header>
     <h1>Christian T-Shirts</h1>
-    <div id="cart-total">Cart Total: <span id="total">$0.00</span></div>
     <nav>
       <ul>
         <li><a href="#" id="home-link">Home</a></li>
         <li><a href="#" id="shop-link">Shop</a></li>
         <li><a href="#" id="cart-link">Cart</a></li>
       </ul>
+      <div id="cart-total">$0.00</div>
     </nav>
   </header>
 
@@ -70,15 +22,19 @@ PE html>
     <h2>Featured Products</h2>
     <div class="product">
       <img src="tshirt1.jpg" alt="T-Shirt 1">
-      <h3>T-Shirt 1</h3>
-      <p>$19.99</p>
-      <button class="add-to-cart">Add to Cart</button>
+      <div class="product-info">
+        <h3>T-Shirt 1</h3>
+        <p>$19.99</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
     </div>
     <div class="product">
       <img src="tshirt2.jpg" alt="T-Shirt 2">
-      <h3>T-Shirt 2</h3>
-      <p>$24.99</p>
-      <button class="add-to-cart">Add to Cart</button>
+      <div class="product-info">
+        <h3>T-Shirt 2</h3>
+        <p>$24.99</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
     </div>
     <!-- Add more product elements as needed -->
   </div>
