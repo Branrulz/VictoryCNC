@@ -1,65 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Victory CNC - Custom T-Shirts and Products</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header>
-      <h1>Victory CNC</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-    
-    <main>
-      <section class="hero">
-        <h2>Custom T-Shirts and Products</h2>
-        <p>At Victory CNC, we produce high-quality custom T-shirts and a variety of other custom products. Whether you need a custom T-shirt for your business, a family reunion, or any other occasion, we have you covered. </p>
-        <button>Get a Quote</button>
-      </section>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victory CNC</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Victory CNC</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section id="products">
+      <h2>Featured Products</h2>
+      <div class="product">
+        <img src="tshirt1.jpg" alt="T-Shirt 1">
+        <h3>T-Shirt 1</h3>
+        <p>$19.99</p>
+        <button>Add to Cart</button>
+      </div>
       
-      <section class="about">
-        <h2>About Victory CNC</h2>
-        <p>Victory CNC is a family-owned business that has been providing custom products to customers for over 10 years. We take pride in our work and use only the best materials to ensure that every product we produce is of the highest quality.</p>
-        <img src="about-image.jpg" alt="Victory CNC Shop">
-      </section>
+      <div class="product">
+        <img src="tshirt2.jpg" alt="T-Shirt 2">
+        <h3>T-Shirt 2</h3>
+        <p>$24.99</p>
+        <button>Add to Cart</button>
+      </div>
       
-      <section class="services">
-        <h2>Our Services</h2>
-        <ul>
-          <li>Custom T-Shirts</li>
-          <li>Custom Hats</li>
-          <li>Custom Bags</li>
-          <li>Custom Mugs</li>
-        </ul>
-      </section>
+      <!-- Add more product items here -->
       
-      <section class="contact">
-        <h2>Contact Us</h2>
-        <form>
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name">
-          
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email">
-          
-          <label for="message">Message:</label>
-          <textarea id="message" name="message"></textarea>
-          
-          <button type="submit">Send</button>
-        </form>
-      </section>
-    </main>
-    
-    <footer>
-      <p>Copyright © 2023 Victory CNC</p>
-    </footer>
-  </body>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2023 VictoryCNC. All rights reserved.</p>
+  </footer>
+</body>
 </html>
