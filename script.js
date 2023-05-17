@@ -1,7 +1,7 @@
 // Function to handle 'Add to Cart' button click
 function addToCart(event) {
   const button = event.target;
-  const product = button.parentNode;
+  const product = button.closest('.product');
   const title = product.querySelector('h3').textContent;
   const price = product.querySelector('p').textContent;
 
@@ -59,7 +59,7 @@ function formatCurrency(amount) {
 }
 
 // Add event listener to all "add to cart" buttons
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.add-to-cart');
 buttons.forEach((button) => {
   button.addEventListener('click', addToCart);
 });
