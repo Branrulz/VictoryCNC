@@ -64,5 +64,35 @@ buttons.forEach((button) => {
   button.addEventListener('click', addToCart);
 });
 
+// Function to handle navigation
+function navigateTo(page) {
+  // Hide all pages
+  const pages = document.querySelectorAll('.page');
+  pages.forEach((page) => {
+    page.style.display = 'none';
+  });
+
+  // Show the selected page
+  const selectedPage = document.getElementById(page);
+  selectedPage.style.display = 'block';
+}
+
+// Add event listeners to navigation links
+const homeLink = document.getElementById('home-link');
+const shopLink = document.getElementById('shop-link');
+const cartLink = document.getElementById('cart-link');
+
+homeLink.addEventListener('click', () => {
+  navigateTo('home-page');
+});
+
+shopLink.addEventListener('click', () => {
+  navigateTo('shop-page');
+});
+
+cartLink.addEventListener('click', () => {
+  navigateTo('cart-page');
+});
+
 // Initialize the cart summary
 updateCartSummary();
