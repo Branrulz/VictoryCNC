@@ -56,7 +56,6 @@ nav a {
   text-align: center;
 }
 
-
 .product img {
   width: 150px;
   margin-bottom: 10px;
@@ -112,5 +111,5 @@ footer {
   background-color: #333;
   color: #ffbc03;
   padding: 10px;
-  text-align: bottom;
+  text-align: center; /* Updated: Align center for the footer text */
 }
