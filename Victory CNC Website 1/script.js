@@ -1,98 +1,43 @@
-// Function to handle 'Add to Cart' button click
-function addToCart(event) {
-  const button = event.target;
-  const product = button.closest('.product');
-  const title = product.querySelector('h3').textContent;
-  const price = product.querySelector('p').textContent;
+// Function to make a payment using Square
+function makeSquarePayment() {
+  // Define your Square API endpoint and access token
+  const squareApiUrl = 'https://connect.squareupsandbox.com/v2/payments';
+  const accessToken = 'sandbox-sq0idb-xxGcGgwjcKAkUn6PVD6U2w'; // Replace with your actual Square access token
 
-  const cartItem = document.createElement('div');
-  cartItem.classList.add('cart-item');
+  // Define the payment request body
+  const requestBody = {
+    amount_money: {
+      amount: calculateSubtotal(document.querySelectorAll('.cart-item')) * 100, // Convert to cents
+      currency: 'USD',
+    },
+    idempotency_key: generateIdempotencyKey(),
+    source_id: 'cnon:card-nonce-ok', // Replace with the actual source ID
+  };
 
-  cartItem.innerHTML = `
-    <h3>${title}</h3>
-    <p>${price}</p>
-  `;
+  // Define request headers
+  const headers = {
+    'Square-Version': '2023-09-25',
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
 
-  const cartContainer = document.getElementById('cart-container');
-  cartContainer.appendChild(cartItem);
-
-  updateCartSummary();
-  alert('Item added to cart!');
+  // Send the payment request to Square
+  axios
+    .post(squareApiUrl, requestBody, { headers })
+    .then(response => {
+      console.log('Payment successful:', response.data);
+      // Handle successful payment, e.g., show a success message, clear the cart, etc.
+      clearCart();
+      alert('Payment successful! Thank you for your purchase.');
+    })
+    .catch(error => {
+      console.error('Payment error:', error.response.data);
+      // Handle payment error, e.g., show an error message to the user
+      alert('Payment failed. Please try again later.');
+    });
 }
 
-// Function to update the cart summary
-function updateCartSummary() {
-  const cartItems = document.querySelectorAll('.cart-item');
-  const subtotal = calculateSubtotal(cartItems);
-  const tax = calculateTax(subtotal);
-  const total = subtotal + tax;
-
-  const subtotalElement = document.getElementById('subtotal');
-  subtotalElement.textContent = formatCurrency(subtotal);
-
-  const taxElement = document.getElementById('tax');
-  taxElement.textContent = formatCurrency(tax);
-
-  const totalElement = document.getElementById('total');
-  totalElement.textContent = formatCurrency(total);
+// Function to generate an idempotency key (a unique key for each payment request)
+function generateIdempotencyKey() {
+  return Date.now().toString();
 }
-
-// Function to calculate the subtotal of the cart items
-function calculateSubtotal(cartItems) {
-  let subtotal = 0;
-  cartItems.forEach((cartItem) => {
-    const price = parseFloat(cartItem.querySelector('p').textContent.slice(1));
-    subtotal += price;
-  });
-  return subtotal;
-}
-
-// Function to calculate the tax
-function calculateTax(subtotal) {
-  const taxRate = 0.1; // Assuming tax rate is 10%
-  return subtotal * taxRate;
-}
-
-// Function to format currency
-function formatCurrency(amount) {
-  return '$' + amount.toFixed(2);
-}
-
-// Add event listener to all "add to cart" buttons
-const buttons = document.querySelectorAll('.add-to-cart');
-buttons.forEach((button) => {
-  button.addEventListener('click', addToCart);
-});
-
-// Function to handle navigation
-function navigateTo(page) {
-  // Hide all pages
-  const pages = document.querySelectorAll('.page');
-  pages.forEach((page) => {
-    page.style.display = 'none';
-  });
-
-  // Show the selected page
-  const selectedPage = document.getElementById(page);
-  selectedPage.style.display = 'block';
-}
-
-// Add event listeners to navigation links
-const homeLink = document.getElementById('home-link');
-const shopLink = document.getElementById('shop-link');
-const cartLink = document.getElementById('cart-link');
-
-homeLink.addEventListener('click', () => {
-  navigateTo('home-page');
-});
-
-shopLink.addEventListener('click', () => {
-  navigateTo('shop-page');
-});
-
-cartLink.addEventListener('click', () => {
-  navigateTo('cart-page');
-});
-
-// Initialize the cart summary
-updateCartSummary();

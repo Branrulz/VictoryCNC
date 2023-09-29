@@ -1,33 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>Shopping Cart</h1>
-    <div id="cart-container">
-      <!-- Cart items will be dynamically added here -->
-    </div>
-    <div id="cart-summary">
-      <h2>Cart Summary</h2>
-      <table>
-        <tr>
-          <td>Subtotal:</td>
-          <td id="subtotal">$0.00</td>
-        </tr>
-        <tr>
-          <td>Tax:</td>
-          <td id="tax">$0.00</td>
-        </tr>
-        <tr>
-          <td>Total:</td>
-          <td id="total">$0.00</td>
-        </tr>
-      </table>
-      <button id="checkout-btn">Checkout</button>
-    </div>
-    <script src="script.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Shopping Cart</h1>
+  <div id="cart-container">
+    <!-- Cart items will be dynamically added here -->
+  </div>
+  <div id="cart-summary">
+    <h2>Cart Summary</h2>
+    <table>
+      <tr>
+        <td>Subtotal:</td>
+        <td id="subtotal">$0.00</td>
+      </tr>
+      <tr>
+        <td>Tax:</td>
+        <td id="tax">$0.00</td>
+      </tr>
+      <tr>
+        <td>Total:</td>
+        <td id="total">$0.00</td>
+      </tr>
+    </table>
+    <button id="checkout-btn">Checkout</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Function to make a payment using Square
+    function makeSquarePayment() {
+      // Define your Square API endpoint and access token
+      const squareApiUrl = 'https://connect.squareupsandbox.com/v2/payments';
+      const accessToken = 'sq0idb-xxGcGgwjcKAkUn6PVD6U2w'; // Replace with your actual Square access token
+
+      // Define the payment request body
+      const requestBody = {
+        amount_money: {
+          amount: calculateSubtotal(document.querySelectorAll('.cart-item')) * 100, // Convert to cents
+          currency: 'USD',
+        },
+        idempotency_key: generateIdempotencyKey(),
+        source_id: 'cnon:card-nonce-ok', // Replace with the actual source ID
+      };
+
+      // Define request headers
+      const headers = {
+        'Square-Version': '2023-09-25',
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      };
+
+      // Send the payment request to Square
+      axios
+        .post(squareApiUrl, requestBody, { headers })
+        .then(response => {
+          console.log('Payment successful:', response.data);
+          // Handle successful payment, e.g., show a success message, clear the cart, etc.
+          clearCart();
+          alert('Payment successful! Thank you for your purchase.');
+        })
+        .catch(error => {
+          console.error('Payment error:', error.response.data);
+          // Handle payment error, e.g., show an error message to the user
+          alert('Payment failed. Please try again later.');
+        });
+    }
+
+    // Function to generate an idempotency key (a unique key for each payment request)
+    function generateIdempotencyKey() {
+      return Date.now().toString();
+    }
+
+    // Function to clear the cart
+    function clearCart() {
+      const cartContainer = document.getElementById('cart-container');
+      while (cartContainer.firstChild) {
+        cartContainer.removeChild(cartContainer.firstChild);
+      }
+      // Update the cart summary
+      updateCartSummary();
+    }
+
+    // Your existing JavaScript code
+  </script>
+</body>
 </html>
